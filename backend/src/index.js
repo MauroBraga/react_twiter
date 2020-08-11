@@ -1,6 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
-
+const cors = require('cors');
 
 const app = express();
 
@@ -8,6 +8,10 @@ const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
 module.exports = mongoose.connect('mongodb://localhost/goweek-backend', { useNewUrlParser: true })
+
+app.use(cors({
+    origin: '*'
+}))
 
 app.use((req, res,next) =>{
     req.io = io;
